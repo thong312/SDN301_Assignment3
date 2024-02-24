@@ -1,0 +1,97 @@
+<!-- views/orchidDetail.ejs -->
+<html>
+
+<head>
+    <title>Orchid Detail</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Additional styles -->
+    <style>
+        body {
+            background: linear-gradient(45deg, #49a09d, #5f2c82);
+            color: #fff;
+        }
+        .orchid-image{
+            width:100vh;
+            height:50vh;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .title-header {
+            display: flex;
+            justify-content: space-between; /* Phần tử trong card header sẽ nằm hai bên */
+            align-items: center; /* Canh chỉnh theo chiều dọc */
+            padding: 0.75rem 1.25rem;
+        }
+
+        .list-group-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            margin-top:10vh;
+        }
+
+        .btn-primary:hover {
+            background-color: #219b56;
+            border-color: #219b56;
+        }
+
+        /* Align image and text horizontally */
+        .card-body {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Adjust margin between image and text */
+        .card-body img {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <div class="title-header">
+                <h1 class="mt-5"><%= orchid.name %></h1>
+                <a href="/orchids" class="btn btn-primary">Back to Orchids List</a>
+            </div>
+        </div>
+    
+        <!-- Display Orchid Details -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6"> <!-- Image column for medium devices and above -->
+                        <img class="orchid-image img-fluid" src="<%= orchid.image %>" alt="<%= orchid.name %> Image" />
+                    </div>
+                    <div class="col-md-6 mt-5"> <!-- List group column for medium devices and above -->
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Price:</strong> <%= orchid.price %></li>
+                            <li class="list-group-item"><strong>Original:</strong> <%= orchid.original %></li>
+                            <li class="list-group-item"><strong>Is Natural:</strong> <%= orchid.isNatural ? 'Yes' : 'No' %></li>
+                            <li class="list-group-item"><strong>Color:</strong> <%= orchid.color %></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

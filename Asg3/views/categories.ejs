@@ -1,0 +1,18 @@
+<!-- views/categories.ejs -->
+<html>
+<head>
+    <title>Categories List</title>
+</head>
+<body>
+    <h1>Categories List</h1>
+
+    <ul>
+        <% categories.forEach((category) => { %>
+            <li>
+                <strong><%= category.name %></strong>
+                <p><%= category.description %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

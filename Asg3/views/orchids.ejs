@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Orchids List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(45deg, #49a09d, #5f2c82);
+      font-family: sans-serif;
+      font-weight: 100;
+    }
+
+    .container.title {
+      text-align: center;
+      /* Center the content inside this container */
+    }
+
+    .orchid-image {
+      width: 80px;
+      height: 80px;
+      /* margin: 0 auto; */
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .modal-content{
+      background-color: rgba(255, 255, 255);
+    }
+    .dropdown-menu {
+      background-color: rgba(255, 255, 255, 0,5);
+    }
+
+    .table th,
+    .table td {
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    tbody {
+      tr {
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+
+    .actions-btn {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    /* Align checkboxes horizontally */
+    .form-group.row {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Adjust margin between checkbox label and checkbox */
+    .form-check {
+      margin-right: 20px;
+    }
+
+    .btn-transparent {
+      background-color: rgba(39, 91, 174, 0.5);
+      border-color: rgba(39, 147, 174, 0.5);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center" style="color: white;">Orchids List</h1>
+
+    <!-- Button to Trigger Modal -->
+    <div class="text-right">
+      <button type="button" class="btn btn-primary btn-transparent" data-toggle="modal" data-target="#addOrchidModal">
+        +
+      </button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addOrchidModal" tabindex="-1" role="dialog" aria-labelledby="addOrchidModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addOrchidModalLabel">Add Orchid</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Orchids Form -->
+            <form method="post">
+              <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" name="name">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="image" class="col-sm-2 col-form-label">Image URL</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="image" name="image">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="price" class="col-sm-2 col-form-label">Price</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="price" name="price">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="original" class="col-sm-2 col-form-label">Original</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="original" name="original">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Is Natural</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="isNatural" name="isNatural" value="true">
+                    <label class="form-check-label" for="isNatural">True</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="isNotNatural" name="isNatural" value="false">
+                    <label class="form-check-label" for="isNotNatural">False</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="color" class="col-sm-2 col-form-label">Color</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="color" name="color">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                  <button type="submit" class="btn btn-primary" onclick="return confirmCreate()">Add Orchid</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orchids Table -->
+    <table class="table">
+      <thead>
+        <tr class="table=column">
+          <th class="image-column">Image</th>
+          <th class="name-column">Name</th>
+          <th class="price-column">Price</th>
+          <th class="actions-column">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orchids.forEach((orchid, index)=> { %>
+          <tr>
+
+            <td>
+              <figure class="image is-64x64">
+                <img class="orchid-image" src="<%= orchid.image %>" alt="<%= orchid.name %> Image">
+              </figure>
+            </td>
+            <td>
+              <%= orchid.name %>
+            </td>
+            <td>
+              <%= orchid.price %>
+            </td>
+            <td>
+
+              <div class="dropdown">
+                <button class="button is-primary is-light actions-btn" data-index="<%= index %>">
+                  ...
+                </button>
+                <div class="dropdown-menu" data-index="<%= index %>">
+                  <a href="/orchids/detail/<%= orchid._id %>" class="dropdown-item"> View detail </a>
+                  <a href="/orchids/edit/<%= orchid._id %>" class="dropdown-item">Edit</a>
+                  <a onclick="confirmDelete('<%= orchid._id %>')" class="dropdown-item">Delete</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Your existing Bootstrap JS includes -->
+
+  <script>
+    $(document).ready(function () {
+      // Show dropdown menu on button click for the clicked row
+      $(".actions-btn").click(function () {
+        var index = $(this).data("index");
+        $(".dropdown-menu").hide();
+        $(".dropdown-menu[data-index=" + index + "]").toggle();
+      });
+
+      // Hide dropdown menus when clicking outside of them
+      $(document).click(function (event) {
+        if (!$(event.target).closest(".dropdown").length) {
+          $(".dropdown-menu").hide();
+        }
+      });
+    });
+  </script>
+  <script>
+    function confirmDelete(orchid){
+      if(confirm("are you sure")){
+        window.location.href=`/orchids/delete/${orchid}`
+      }
+    }
+  </script>
+  <script>
+    function confirmCreate(){
+      // Lấy giá trị của các trường input
+      var name = document.getElementById("name").value;
+      var image = document.getElementById("image").value;
+      var price = document.getElementById("price").value;
+      var original = document.getElementById("original").value;
+      var isNatural = document.querySelector('input[name="isNatural"]:checked');
+      var color = document.getElementById("color").value;
+
+      // Kiểm tra xem các trường có trống hay không
+      if (name === "" || image === "" || price === "" || original === "" || !isNatural || color === "") {
+        // Nếu có trường trống, hiển thị thông báo và ngăn chặn việc submit
+        alert("Vui lòng điền đầy đủ thông tin ");
+        return false;
+      }
+
+      // Nếu tất cả các trường đều đã được điền, cho phép submit
+      return confirm('Are you sure?');
+    }
+  </script>
+</body>
+
+</html>
