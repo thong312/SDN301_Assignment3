@@ -9,10 +9,10 @@ class userController {
         const { username, password } = req.body;
         let errors = [];
         if (!username || !password) {
-            errors.push({ msg: 'Please enter all fields' });
+            errors.push({ error_msg: 'Please enter all fields' });
         }
         if (password.length < 6) {
-            errors.push({ msg: 'Password must be at least 6 characters' });
+            errors.push({ error_msg: 'Password must be at least 6 characters' });
         }
         if (errors.length > 0) {
             res.render('register', {
@@ -24,7 +24,7 @@ class userController {
         else {
             Users.findOne({ username: username }).then(user => {
                 if (user) {
-                    errors.push({ msg: 'Username already exists' });
+                    errors.push({ error_msg: 'Username already exists' });
                     res.render('register', {
                         errors,
                         username,
