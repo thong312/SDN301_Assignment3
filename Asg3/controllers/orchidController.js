@@ -1,7 +1,7 @@
 const Orchids = require('../models/orchids')
 class OrchidController {
     index(req, res) {
-        Orchids.find({})
+        Orchids.find({}).populate('category')
             .then((orchids) => {
                 res.render('orchids', { orchids: orchids });
             })

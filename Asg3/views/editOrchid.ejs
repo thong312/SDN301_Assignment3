@@ -22,22 +22,78 @@
 </head>
 
 <body>
-    <form>
-        <div class="form-group">
-          <label for="name">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 800px;">
+            <div class="card-header">
+                <h1 class="title">Edit Orchid</h1>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="name" type="text" value="<%= orchid.name %>">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="image" class="col-sm-2 col-form-label">Image</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="image" type="text" value="<%= orchid.image %>">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="price" class="col-sm-2 col-form-label">Price</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="price" type="number" step="any" value="<%= orchid.price %>">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="original" class="col-sm-2 col-form-label">Original</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="original" type="text" value="<%= orchid.original %>">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Is Natural</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input type="radio" name="isNatural" class="form-check-input" value="true" <%=orchid.isNatural ? 'checked' : '' %>>
+                                <label class="form-check-label">True</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" name="isNatural" class="form-check-input" value="false" <%=!orchid.isNatural ? 'checked' : '' %>>
+                                <label class="form-check-label">False</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="color" class="col-sm-2 col-form-label">Color</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="color" type="text" value="<%= orchid.color %>">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-10 offset-sm-2 d-flex justify-content-between">
+                            <button class="btn btn-primary" type="submit">Save</button>
+                            <a class="btn btn-secondary" href="/orchids">Cancel</a>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    </div>
+
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

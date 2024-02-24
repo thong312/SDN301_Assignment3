@@ -7,11 +7,13 @@ const mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const orchidRouter = require('./routes/orchidsRouter');
-const categoryRouter = require('./routes/categoriesRoute');
+const categoryRouter = require('./routes/categoriesRouter');
+const commentRouter = require('./routes/commentRouter');
 
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
+
 
 var app = express();
 //passport 
@@ -32,7 +34,7 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
-const url = 'mongodb://127.0.0.1:27017/Api'
+const url = 'mongodb://127.0.0.1:27017/Assignment3'
 const connect = mongoose.connect(url)
 connect.then((db) => {
   console.log("good connect")
@@ -51,6 +53,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/orchids', orchidRouter);
 app.use('/categories', categoryRouter);
+app.use('/comment',commentRouter)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
